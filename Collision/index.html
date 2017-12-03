@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>collision</title>
+    <style>
+        #myCanvas {
+            display: block;
+            position: fixed;
+            left: 0;
+            top: 0;
+        }
+        #vector {
+            display: block;
+            position: fixed;
+            left: 10px;
+            top: 10px;
+            border: 2px solid red;
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+
+<canvas id="myCanvas"></canvas>
+<div id="vector"><input id="input" type="checkbox" checked>Directing vector</div>
+
+<script>
+
+  // Variables
+
+  let width = document.documentElement.clientWidth;
+  let height = document.documentElement.clientHeight;
+
+  let canvas = document.getElementById('myCanvas');
+  let ctx = canvas.getContext('2d');
+
+  canvas.width = width;
+  canvas.height = height;
+
+  // Objects
+
+  const mouseCoords = {
+    x: 0,
+    y: 0
+  }
+
+  const movingSq = {
+    x: 50,
+    y: 50,
+    side: 30,
+    cx: 65,
+    cy: 65,
+    step: 5,
+    draw() {
+      ctx.clearRect(0, 0, width, height);
+      ctx.beginPath();
+      ctx.fillRect(this.x, this.y, this.side, this.side);
+
+      if(input.checked) {
+        ctx.setLineDash([100, 3000]);
+        ctx.moveTo(this.cx, this.cy);
+        ctx.lineTo(mouseCoords.x, mouseCoords.y);
+        ctx.stroke();
+      }
+
+      ctx.closePath();
+    }
+  }
+
+  // Functions
+
+  const move = (initX, initY, pointX, pointY, step) => {
+
+    const wrap = () => {
+      let length = Math.sqrt(
+        Math.pow((pointX - initX), 2) + Math.pow((pointY - initY), 2)
+      );
+
+      let partialResX;
+      let partialResY;
+
+      if(length !== Infinity) {
+        partialResX = ((pointX - initX) * step) / length;
+        partialResY = ((pointY - initY) * step) / length;
+      } else {
+        partialResX = partialResY = 0;
+      }
+
+      return [partialResX, partialResY];
+    }
+
+    const methods = {
+      forward() {
+        let resX = Math.round(wrap()[0] + initX);
+        let resY = Math.round(wrap()[1] + initY);
+
+        initX = resX;
+        initY = resY;
+        return [resX, resY];
+      },
+      back() {
+        let resX = Math.round(Math.abs(wrap()[0] - initX));
+        let resY = Math.round(Math.abs(wrap()[1] - initY));
+
+        initX = resX;
+        initY = resY;
+        return [resX, resY];
+      }
+    }
+
+    return Object.assign(wrap, methods);
+  }
+
+  const onloadDraw = () => {
+    movingSq.draw();
+  }
+
+  const changeMouseCoords = (e) => {
+    mouseCoords.x = e.pageX;
+    mouseCoords.y = e.pageY;
+
+    movingSq.draw();
+  }
+
+  const keyPressedHandler = (e) => {
+    switch(e.keyCode) {
+      case 119: {
+        if(Math.abs(mouseCoords.x - movingSq.cx) > movingSq.side/4 ||
+          Math.abs(mouseCoords.y - movingSq.cy) > movingSq.side/4) {
+
+          let res =
+            move(movingSq.cx, movingSq.cy, mouseCoords.x, mouseCoords.y, movingSq.step)
+              .forward();
+
+          movingSq.cx = res[0];
+          movingSq.cy = res[1];
+          movingSq.x = movingSq.cx - movingSq.side/2;
+          movingSq.y = movingSq.cy - movingSq.side/2;
+
+          movingSq.draw();
+          break;
+        }
+      }
+      case 115: {
+        if(Math.abs(mouseCoords.x - movingSq.cx) > movingSq.side/4 ||
+          Math.abs(mouseCoords.y - movingSq.cy) > movingSq.side/4) {
+
+          let res =
+            move(movingSq.cx, movingSq.cy, mouseCoords.x, mouseCoords.y, movingSq.step)
+              .back();
+
+          movingSq.cx = res[0];
+          movingSq.cy = res[1];
+          movingSq.x = movingSq.cx - movingSq.side/2;
+          movingSq.y = movingSq.cy - movingSq.side/2;
+
+          movingSq.draw();
+          break;
+        }
+      }
+    }
+  }
+
+  // EventListener
+
+  document.body.addEventListener('load', onloadDraw());
+  canvas.addEventListener('mousemove', changeMouseCoords);
+  document.addEventListener('keypress', keyPressedHandler);
+</script>
+
+</body>
+</html>
