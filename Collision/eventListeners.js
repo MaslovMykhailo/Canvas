@@ -52,6 +52,8 @@ const keyPressedHandler = (e) => {
         movingSq.x = movingSq.cx - movingSq.width/2;
         movingSq.y = movingSq.cy - movingSq.height/2;
 
+        collisionDetection(movingSq, arrOfStatic);
+
         ctx.clearRect(0, 0, width, height);
         renderMovingSq(movingSq);
         renderStaticRect(arrOfStatic);
