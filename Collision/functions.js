@@ -16,12 +16,72 @@ const renderMovingSq = (moveSq) => {
 
 const collisionDetection = (moveSq, arrOfStat) => {
   arrOfStat.forEach(stat => {
-    if(intersectionOfMovingAndStaticRect(moveSq, stat)) {
-      stat.fillStyle = 'red';
-    } else {
+    let typeIntersection = intersectionOfMovingAndStaticRect(moveSq, stat);
+    if (!typeIntersection) {
       stat.fillStyle = 'black';
+    } else {
+      stat.fillStyle = 'red';
+
+      collisionHandler(moveSq, stat, typeIntersection);
     }
   });
+  moveSq.cx = moveSq.x + moveSq.width / 2;
+  moveSq.cy = moveSq.y + moveSq.height / 2;
+}
+
+// handler collision of squares
+
+const collisionHandler = (moveSq, stat, type) => {
+  switch (type) {
+    case '1': {
+      if (stat.x + stat.width - moveSq.x > stat.y + stat.height - moveSq.y) {
+        moveSq.y = stat.y + stat.height;
+      } else {
+        moveSq.x = stat.x + stat.width;
+      }
+      break;
+    }
+    case '2': {
+      if (moveSq.x + moveSq.width - stat.x > stat.y + stat.height - moveSq.y) {
+        moveSq.y = stat.y + stat.height;
+      } else {
+        moveSq.x = stat.x - moveSq.width;
+      }
+      break;
+    }
+    case '3': {
+      if (stat.x + stat.width - moveSq.x > moveSq.y + moveSq.height - stat.y) {
+        moveSq.y = stat.y - moveSq.height;
+      } else {
+        moveSq.x = stat.x + stat.width;
+      }
+      break;
+    }
+    case '4': {
+      if (moveSq.x + moveSq.width - stat.x > moveSq.y + moveSq.height - stat.y) {
+        moveSq.y = stat.y - moveSq.height;
+      } else {
+        moveSq.x = stat.x - moveSq.width;
+      }
+      break;
+    }
+    case '12': {
+      moveSq.y = stat.y + stat.height;
+      break;
+    }
+    case '24': {
+      moveSq.x = stat.x - moveSq.width;
+      break;
+    }
+    case '34': {
+      moveSq.y = stat.y - moveSq.height;
+      break;
+    }
+    case '13': {
+      moveSq.x = stat.x + stat.width;
+      break;
+    }
+  }
 }
 
 // check collision with mouse pointer

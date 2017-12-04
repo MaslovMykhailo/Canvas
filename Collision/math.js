@@ -47,10 +47,11 @@ const intersectionOfMovingAndStaticRect = (moving ,stat) => {
                        [moving.x + moving.width, moving.y],
                        [moving.x, moving.y + moving.height],
                        [moving.x + moving.width, moving.y + moving.height]];
+  let res = [];
   let i;
   for(i = 0 ; i < 4 ; i++) {
     if(vertex[i][0] > stat.x && vertex[i][0] < stat.x + stat.width &&
-       vertex[i][1] > stat.y && vertex[i][1] < stat.y + stat.height) return true;
+       vertex[i][1] > stat.y && vertex[i][1] < stat.y + stat.height) res.push(i+1);
   }
-  return false;
+  return res.join('');
 }
