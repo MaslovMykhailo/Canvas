@@ -19,46 +19,28 @@ const changeMouseCoords = (e) => {
 const keyPressedHandler = (e) => {
   switch(e.keyCode) {
     case 119: {
-      if(Math.abs(mouseCoords.x - movingSq.cx) > movingSq.width/4 ||
-         Math.abs(mouseCoords.y - movingSq.cy) > movingSq.height/4) {
+      if(checkCollisionMouse(movingSq, mouseCoords)) {
 
-        let res =
-          move(movingSq.cx, movingSq.cy, mouseCoords.x, mouseCoords.y, movingSq.step)
-            .forward();
-
-        movingSq.cx = res[0];
-        movingSq.cy = res[1];
-        movingSq.x = movingSq.cx - movingSq.width/2;
-        movingSq.y = movingSq.cy - movingSq.height/2;
-
+        changeCoordsSq(movingSq, mouseCoords, 'forward');
         collisionDetection(movingSq, arrOfStatic);
 
         ctx.clearRect(0, 0, width, height);
         renderMovingSq(movingSq);
         renderStaticRect(arrOfStatic);
-        break;
       }
+      break;
     }
     case 115: {
-      if(Math.abs(mouseCoords.x - movingSq.cx) > movingSq.width/4 ||
-         Math.abs(mouseCoords.y - movingSq.cy) > movingSq.height/4) {
+      if(checkCollisionMouse(movingSq, mouseCoords)) {
 
-        let res =
-          move(movingSq.cx, movingSq.cy, mouseCoords.x, mouseCoords.y, movingSq.step)
-            .back();
-
-        movingSq.cx = res[0];
-        movingSq.cy = res[1];
-        movingSq.x = movingSq.cx - movingSq.width/2;
-        movingSq.y = movingSq.cy - movingSq.height/2;
-
+        changeCoordsSq(movingSq, mouseCoords, 'back');
         collisionDetection(movingSq, arrOfStatic);
 
         ctx.clearRect(0, 0, width, height);
         renderMovingSq(movingSq);
         renderStaticRect(arrOfStatic);
-        break;
       }
+      break;
     }
   }
 }
