@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Point-test</title>
+    <style>
+        #canvas {
+            display: block;
+            position: fixed;
+            left: 0;
+            top: 0;
+        }
+    </style>
+    <script src="../lib/GeometricObject/point.js"></script>
+    <script src="../lib/mouse.js"></script>
+    <script src="../lib/GeometricObject/rectangle.js"></script>
+    <script src="../lib/GeometricObject/circle.js"></script>
+    <script src="../lib/constants.js"></script>
+    <script src="../lib/GeometricObject/segment.js"></script>
+    <script src="../lib/typeOfIntersection.js"></script>
+    <script src="../lib/GeometricObject/vector.js"></script>
+</head>
+<body>
+    <canvas id="canvas"></canvas>
+
+    <script>
+      let width = document.documentElement.clientWidth;
+      let height = document.documentElement.clientHeight;
+
+      let canvas = document.getElementById('canvas');
+      let ctx = canvas.getContext('2d');
+
+      canvas.width = width;
+      canvas.height = height;
+
+      const mouse = new Mouse();
+
+      const changeMouse = (e) => {
+        mouse.x = e.pageX;
+        mouse.y = e.pageY;
+      }
+
+      canvas.addEventListener('mousemove', changeMouse);
+
+      const draw = () => {
+        ctx.clearRect(0, 0, width, height);
+
+        const point = new Point(mouse.x, mouse.y);
+        point.draw(ctx, 3, 'black');
+
+        const segment = new Segment(100, 50, 300, 500);
+        segment.draw(ctx, 3, 'black');
+
+        const rect = new Rectangle(500, 300, 100, 250);
+        rect.draw(ctx, 'black');
+
+        const circle = new Circle(800, 300, 50);
+        circle.draw(ctx, 'black');
+
+        if(pointSegmentIntersect(point, segment)) {
+          segment.draw(ctx, 3, 'red');
+        }
+
+        if(pointRectangleIntersect(point, rect)) {
+          rect.draw(ctx, 'red');
+        }
+
+        if(pointCircleIntersect(point, circle)) {
+          circle.draw(ctx, 'red');
+        }
+      }
+
+      setInterval(draw, 10);
+
+    </script>
+</body>
+</html>
