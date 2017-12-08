@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Circle-rectangle-test</title>
+    <style>
+        #canvas {
+            display: block;
+            position: fixed;
+            left: 0;
+            top: 0;
+        }
+    </style>
+    <script src="../../lib/constants.js"></script>
+    <script src="../../lib/mouse.js"></script>
+    <script src="../../lib/GeometricObjects/point.js"></script>
+    <script src="../../lib/GeometricObjects/vector.js"></script>
+    <script src="../../lib/GeometricObjects/rectangle.js"></script>
+    <script src="../../lib/GeometricObjects/circle.js"></script>
+    <script src="../../lib/GeometricObjects/segment.js"></script>
+    <script src="../../lib/Intersection/circleObjectIntersect.js"></script>
+    <script src="../../lib/Intersection/pointObjectIntersect.js"></script>
+    <script src="../../lib/Intersection/rectanglesIntersection.js"></script>
+    <script src="../../lib/Intersection/segmentObjectIntersect.js"></script>
+</head>
+<body>
+<canvas id="canvas"></canvas>
+
+<script>
+  let width = document.documentElement.clientWidth;
+  let height = document.documentElement.clientHeight;
+
+  let canvas = document.getElementById('canvas');
+  let ctx = canvas.getContext('2d');
+
+  canvas.width = width;
+  canvas.height = height;
+
+  const mouse = new Mouse();
+
+  const changeMouse = (e) => {
+    mouse.x = e.pageX;
+    mouse.y = e.pageY;
+  }
+
+  canvas.addEventListener('mousemove', changeMouse);
+
+  const draw = () => {
+    ctx.clearRect(0, 0, width, height);
+
+    const sq = new Rectangle(mouse.x-25, mouse.y-25, 50, 50);
+    sq.draw(ctx, 'black');
+
+    const rect1 = new Rectangle(100, 300, 200, 300);
+    rect1.draw(ctx, 'black');
+
+    const rect2 = new Rectangle(100, 50, 20, 20);
+    rect2.draw(ctx, 'black');
+
+    const circle = new Circle(700, 300, 200);
+    circle.draw(ctx, 'black');
+
+    if(rectanglesIntersect(sq, rect1)) {
+      rect1.draw(ctx, 'red');
+    }
+
+    if(rectanglesIntersect(sq, rect2)) {
+      rect2.draw(ctx, 'red');
+    }
+
+    if(circleRectangleIntersect(circle, sq)) {
+      circle.draw(ctx, 'red');
+    }
+  }
+
+  setInterval(draw, 10);
+
+</script>
+</body>
+</html>
