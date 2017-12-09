@@ -12,7 +12,7 @@
         }
     </style>
     <script src="../../lib/constants.js"></script>
-    <script src="../../lib/mouse.js"></script>
+    <script src="../../lib/GeometricObjects/mouse.js"></script>
     <script src="../../lib/GeometricObjects/point.js"></script>
     <script src="../../lib/GeometricObjects/vector.js"></script>
     <script src="../../lib/GeometricObjects/rectangle.js"></script>
@@ -22,6 +22,7 @@
     <script src="../../lib/Intersection/pointObjectIntersect.js"></script>
     <script src="../../lib/Intersection/rectanglesIntersection.js"></script>
     <script src="../../lib/Intersection/segmentObjectIntersect.js"></script>
+    <script src="../../lib/Intersection/universalIntersect.js"></script>
 </head>
 <body>
 <canvas id="canvas"></canvas>
@@ -39,8 +40,8 @@
   const mouse = new Mouse();
 
   const changeMouse = (e) => {
-    mouse.x = e.pageX;
-    mouse.y = e.pageY;
+    mouse.setx = e.pageX;
+    mouse.sety = e.pageY;
   }
 
   canvas.addEventListener('mousemove', changeMouse);
@@ -69,27 +70,27 @@
     const circle = new Circle(350, 250, 50);
     circle.draw(ctx, 'black');
 
-    if(segmentsIntersect(moveSegment, segment1)) {
+    if(intersect(moveSegment, segment1)) {
       segment1.draw(ctx, 3, 'red');
     }
 
-    if(segmentsIntersect(moveSegment, segment2)) {
+    if(intersect(moveSegment, segment2)) {
       segment2.draw(ctx, 3, 'red');
     }
 
-    if(segmentsIntersect(moveSegment, segment3)) {
+    if(intersect(moveSegment, segment3)) {
       segment3.draw(ctx, 3, 'red');
     }
 
-    if(segmentRectangleIntersect(moveSegment, rect1)) {
+    if(intersect(moveSegment, rect1)) {
       rect1.draw(ctx, 'red');
     }
 
-    if(segmentRectangleIntersect(moveSegment, rect2)) {
+    if(intersect(moveSegment, rect2)) {
       rect2.draw(ctx, 'red');
     }
 
-    if(segmentCircleIntersect(moveSegment, circle)) {
+    if(intersect(moveSegment, circle)) {
       circle.draw(ctx, 'red');
     }
   }
