@@ -11,7 +11,6 @@
             top: 0;
         }
     </style>
-    <script src="../../lib/constants.js"></script>
     <script src="../../lib/GeometricObjects/mouse.js"></script>
     <script src="../../lib/GeometricObjects/point.js"></script>
     <script src="../../lib/GeometricObjects/vector.js"></script>
@@ -61,6 +60,9 @@
     const circle = new Circle(700, 300, 200);
     circle.draw(ctx, 'black');
 
+    const smallcircle = new Circle(1000, 50, 20);
+    smallcircle.draw(ctx, 'black');
+
     if(intersect(sq, rect1)) {
       rect1.draw(ctx, 'red');
     }
@@ -71,6 +73,10 @@
 
     if(intersect(circle, sq)) {
       circle.draw(ctx, 'red');
+    }
+
+    if(intersect(smallcircle, sq)) {
+      smallcircle.draw(ctx, 'red');
     }
   }
 
