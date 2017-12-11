@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Polygon contains object test</title>
+    <title>Polygon-test</title>
     <style>
         #canvas {
             display: block;
@@ -24,8 +24,6 @@
     <script src="../../lib/Intersection/segmentObjectIntersect.js"></script>
     <script src="../../lib/Intersection/polygonObjectIntersect.js"></script>
     <script src="../../lib/Intersection/universalIntersect.js"></script>
-    <script src="../../lib/Contains/polygonContainObject.js"></script>
-    <script src="../../lib/Contains/universalContains.js"></script>
 </head>
 <body>
 <canvas id="canvas"></canvas>
@@ -52,18 +50,18 @@
   const draw = () => {
     ctx.clearRect(0, 0, width, height);
 
-    const movePolygon = new Polygon([mouse.x, mouse.y],
-      [mouse.x + 30, mouse.y + 150],
-      [mouse.x + 100, mouse.y + 160],
-      [mouse.x + 150, mouse.y + 100],
-      [mouse.x + 120, mouse.y + 30]);
+    const movePolygon = new Polygon([mouse.x + 10, mouse.y + 10],
+                                [mouse.x + 20, mouse.y + 100],
+                                [mouse.x + 100, mouse.y + 100],
+                                [mouse.x + 150, mouse.y + 50],
+                                [mouse.x + 100, mouse.y + 10]);
 
     movePolygon.draw(ctx, 'black');
 
     const p = new Point(900, 400);
     p.draw(ctx, 3, 'black');
 
-    const s = new Segment(800, 500, 750, 450);
+    const s = new Segment(800, 500, 400, 200);
     s.draw(ctx, 3, 'black');
 
     const c = new Circle(300, 300, 50);
@@ -81,39 +79,32 @@
     const polygon = new Polygon([900, 500], [1000, 550], [900, 600]);
     polygon.draw(ctx, 'black');
 
-    const bigRect = new Rectangle(450, 50, 300, 150);
-    bigRect.draw(ctx, 'black');
-
-    if(contains(movePolygon, p)) {
-      p.draw(ctx, 3, 'green');
+    if(intersect(p, movePolygon)) {
+      p.draw(ctx, 3, 'red');
     }
 
-    if(contains(movePolygon, s)) {
-      s.draw(ctx, 3,'green');
+    if(intersect(s, movePolygon)) {
+      s.draw(ctx, 3,'red');
     }
 
-    if(contains(movePolygon, c)) {
-      c.draw(ctx, 'green');
+    if(intersect(c, movePolygon)) {
+      c.draw(ctx, 'red');
     }
 
-    if(contains(movePolygon, r)) {
-      r.draw(ctx, 'green');
+    if(intersect(r, movePolygon)) {
+      r.draw(ctx, 'red');
     }
 
-    if(contains(movePolygon, smallc)) {
-      smallc.draw(ctx, 'green');
+    if(intersect(movePolygon, smallc)) {
+      smallc.draw(ctx, 'red');
     }
 
-    if(contains(movePolygon, smallr)) {
-      smallr.draw(ctx, 'green');
+    if(intersect(movePolygon, smallr)) {
+      smallr.draw(ctx, 'red');
     }
 
-    if(contains(movePolygon, polygon)) {
-      polygon.draw(ctx, 'green');
-    }
-
-    if(contains(movePolygon, bigRect)) {
-      bigRec.draw(ctx, 'green');
+    if(intersect(polygon, movePolygon)) {
+      polygon.draw(ctx, 'red');
     }
   }
 
