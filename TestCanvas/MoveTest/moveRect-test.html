@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Move-test</title>
+    <style>
+        #canvas {
+            display: block;
+            position: fixed;
+            left: 0;
+            top: 0;
+        }
+    </style>
+    <script src="../../lib/Mouse/mouse.js"></script>
+    <script src="../../lib/GeometricObjects/point.js"></script>
+    <script src="../../lib/GeometricObjects/vector.js"></script>
+    <script src="../../lib/GeometricObjects/rectangle.js"></script>
+    <script src="../../lib/GeometricObjects/circle.js"></script>
+    <script src="../../lib/GeometricObjects/segment.js"></script>
+    <script src="../../lib/Intersection/circleObjectIntersect.js"></script>
+    <script src="../../lib/Intersection/pointObjectIntersect.js"></script>
+    <script src="../../lib/Intersection/rectanglesIntersection.js"></script>
+    <script src="../../lib/Intersection/segmentObjectIntersect.js"></script>
+    <script src="../../lib/Intersection/universalIntersect.js"></script>
+    <script src="../../lib/Mouse/moveToMouse.js"></script>
+    <script src="../../lib/RenderFunctions/renderDirectingVector.js"></script>
+    <script src="../../lib/RenderFunctions/renderMovingRect.js"></script>
+</head>
+<body>
+<canvas id="canvas"></canvas>
+
+<script>
+  let width = document.documentElement.clientWidth;
+  let height = document.documentElement.clientHeight;
+
+  let canvas = document.getElementById('canvas');
+  let ctx = canvas.getContext('2d');
+
+  canvas.width = width;
+  canvas.height = height;
+
+  const mouse = new Mouse();
+
+  const rect = new Rectangle(100, 100, 50, 50);
+
+  const changeMouse = (e) => {
+    mouse.setx = e.pageX;
+    mouse.sety = e.pageY;
+
+    ctx.clearRect(0, 0, width, height);
+    rect.draw(ctx, 'black');
+    renderDirectingVector(ctx, new Point(rect.x + rect.width/2, rect.y + rect.height/2));
+  }
+
+  const keyPressedHandler = (e) => {
+    if(e.keyCode === 119) {
+      renderMovingRect(ctx, rect);
+    }
+  }
+
+  canvas.addEventListener('mousemove', changeMouse);
+  document.addEventListener('keypress', keyPressedHandler);
+
+</script>
+</body>
+</html>
