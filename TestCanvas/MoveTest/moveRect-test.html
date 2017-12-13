@@ -20,6 +20,7 @@
     <script src="../../lib/GeometricObjects/circle.js"></script>
     <script src="../../lib/GeometricObjects/segment.js"></script>
     <script src="../../lib/GeometricObjects/polygon.js"></script>
+    <script src="../../lib/GeometricObjects/movingObj.js"></script>
     <script src="../../lib/Intersection/circleObjectIntersect.js"></script>
     <script src="../../lib/Intersection/pointObjectIntersect.js"></script>
     <script src="../../lib/Intersection/rectanglesIntersection.js"></script>
@@ -29,6 +30,7 @@
     <script src="../../lib/RenderFunctions/renderDirectingVector.js"></script>
     <script src="../../lib/RenderFunctions/renderMovingObj.js"></script>
     <script src="../../lib/Collision/collisionDetection.js"></script>
+    <script src="../../lib/Collision/changeCoordFunctions.js"></script>
 </head>
 <body>
 <canvas id="canvas"></canvas>
@@ -45,7 +47,7 @@
 
   const mouse = new Mouse();
 
-  const moving = new Rectangle(100, 100, 50, 50);
+  const moving = new MovingRect(100, 100, 50, 50, 5);wwwwww
 
   const arr = [];
 
