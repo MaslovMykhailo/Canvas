@@ -31,6 +31,7 @@
     <script src="../../lib/RenderFunctions/renderMovingObj.js"></script>
     <script src="../../lib/Collision/collisionDetection.js"></script>
     <script src="../../lib/Collision/changeCoordFunctions.js"></script>
+    <script src="../../lib/Collision/tgOfAngle.js"></script>
 </head>
 <body>
 <canvas id="canvas"></canvas>
@@ -51,8 +52,11 @@
 
   const arr = [];
 
-  const polygon = new Polygon([200, 200], [400, 150], [500, 250], [350, 400], [180, 300]);
-  arr.push(polygon);
+  const polygon1 = new Polygon([200, 200], [400, 150], [500, 250], [320, 300], [400, 230]);
+  arr.push(polygon1);
+
+  const polygon2 = new Polygon([300, 200], [400, 350], [660, 270], [400, 300], [400, 230]);
+  arr.push(polygon2);
 
   const rect = new Rectangle(250, 455, 200, 150);
   arr.push(rect);
