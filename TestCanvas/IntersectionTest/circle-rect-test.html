@@ -65,18 +65,22 @@
 
     if(intersect(sq, rect1)) {
       rect1.draw(ctx, 'red');
+      intersect(sq, rect1).forEach(p => p.draw(ctx, 3, 'green'));
     }
 
     if(intersect(sq, rect2)) {
       rect2.draw(ctx, 'red');
+      intersect(sq, rect2).forEach(p => p.draw(ctx, 3, 'green'));
     }
 
     if(intersect(circle, sq)) {
       circle.draw(ctx, 'red');
+      intersect(circle, sq).forEach(p => p.draw(ctx, 3, 'green'));
     }
 
     if(intersect(smallcircle, sq)) {
       smallcircle.draw(ctx, 'red');
+      intersect(smallcircle, sq).forEach(p => p.draw(ctx, 3, 'green'));
     }
   }
 

@@ -48,7 +48,7 @@
   const draw = () => {
     ctx.clearRect(0, 0, width, height);
 
-    const moveSegment = new Segment(mouse.x + 55, mouse.y, mouse.x - 55, mouse.y);
+    const moveSegment = new Segment(mouse.x + 55, mouse.y, mouse.x - 55, mouse.y + 20);
     moveSegment.draw(ctx, 3, 'black');
 
     const segment1 = new Segment(50, 400, 400, 50);
@@ -71,26 +71,32 @@
 
     if(intersect(moveSegment, segment1)) {
       segment1.draw(ctx, 3, 'red');
+      intersect(moveSegment, segment1).forEach(p => p.draw(ctx, 3, 'green'));
     }
 
     if(intersect(moveSegment, segment2)) {
       segment2.draw(ctx, 3, 'red');
+      intersect(moveSegment, segment2).forEach(p => p.draw(ctx, 3, 'green'));
     }
 
     if(intersect(moveSegment, segment3)) {
       segment3.draw(ctx, 3, 'red');
+      intersect(moveSegment, segment3).forEach(p => p.draw(ctx, 3, 'green'));
     }
 
     if(intersect(moveSegment, rect1)) {
       rect1.draw(ctx, 'red');
+      intersect(moveSegment, rect1).forEach(p => p.draw(ctx, 3, 'green'));
     }
 
     if(intersect(moveSegment, rect2)) {
       rect2.draw(ctx, 'red');
+      intersect(moveSegment, rect2).forEach(p => p.draw(ctx, 3, 'green'));
     }
 
     if(intersect(moveSegment, circle)) {
       circle.draw(ctx, 'red');
+      intersect(moveSegment, circle).forEach(p => p.draw(ctx, 3, 'green'));
     }
   }
 

@@ -81,18 +81,22 @@
 
     if(intersect(p, movePolygon)) {
       p.draw(ctx, 3, 'red');
+      intersect(p, movePolygon).forEach(p => p.draw(ctx, 3, 'green'));
     }
 
     if(intersect(s, movePolygon)) {
       s.draw(ctx, 3,'red');
+      intersect(s, movePolygon).forEach(p => p.draw(ctx, 3, 'green'));
     }
 
     if(intersect(c, movePolygon)) {
       c.draw(ctx, 'red');
+      intersect(c, movePolygon).forEach(p => p.draw(ctx, 3, 'green'));
     }
 
     if(intersect(r, movePolygon)) {
       r.draw(ctx, 'red');
+      intersect(r, movePolygon).forEach(p => p.draw(ctx, 3, 'green'));
     }
 
     if(intersect(movePolygon, smallc)) {
@@ -101,10 +105,12 @@
 
     if(intersect(movePolygon, smallr)) {
       smallr.draw(ctx, 'red');
+      intersect(smallr, movePolygon).forEach(p => p.draw(ctx, 3, 'green'));
     }
 
     if(intersect(polygon, movePolygon)) {
       polygon.draw(ctx, 'red');
+      intersect(polygon, movePolygon).forEach(p => p.draw(ctx, 3, 'green'));
     }
   }
 

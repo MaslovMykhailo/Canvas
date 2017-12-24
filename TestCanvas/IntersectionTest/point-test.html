@@ -62,14 +62,17 @@
 
         if(intersect(point, segment)) {
           segment.draw(ctx, 3, 'red');
+          intersect(point, segment).forEach(p => p.draw(ctx, 3, 'green'));
         }
 
         if(intersect(point, rect)) {
           rect.draw(ctx, 'red');
+          intersect(point, rect).forEach(p => p.draw(ctx, 3, 'green'));
         }
 
         if(intersect(point, circle)) {
           circle.draw(ctx, 'red');
+          intersect(point, circle).forEach(p => p.draw(ctx, 3, 'green'));
         }
       }
 
