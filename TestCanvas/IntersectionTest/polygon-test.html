@@ -70,7 +70,7 @@
     const r = new Rectangle(50, 200, 100, 200);
     r.draw(ctx, 'black');
 
-    const smallc = new Circle(1000, 50, 10);
+    const smallc = new Circle(1000, 300, 15);
     smallc.draw(ctx, 'black');
 
     const smallr = new Rectangle(1000, 400, 20, 30);
@@ -101,6 +101,7 @@
 
     if(intersect(movePolygon, smallc)) {
       smallc.draw(ctx, 'red');
+      intersect(smallc, movePolygon).forEach(p => p.draw(ctx, 3, 'green'));
     }
 
     if(intersect(movePolygon, smallr)) {
