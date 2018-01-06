@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Segment-test</title>
+    <style>
+        #canvas {
+            display: block;
+        }
+        #gameRect {
+            display: block;
+            position: absolute;
+            top: 75px;
+            left: 450px;
+            border: 1px solid black;
+        }
+    </style>
+    <script src="../lib/Mouse/mouse.js"></script>
+    <script src="../lib/GeometricObjects/point.js"></script>
+    <script src="../lib/GeometricObjects/vector.js"></script>
+    <script src="../lib/GeometricObjects/rectangle.js"></script>
+    <script src="../lib/GeometricObjects/circle.js"></script>
+    <script src="../lib/GeometricObjects/segment.js"></script>
+    <script src="../lib/Intersection/circleObjectIntersect.js"></script>
+    <script src="../lib/Intersection/pointObjectIntersect.js"></script>
+    <script src="../lib/Intersection/rectanglesIntersection.js"></script>
+    <script src="../lib/Intersection/segmentObjectIntersect.js"></script>
+    <script src="../lib/Intersection/universalIntersect.js"></script>
+    <script src="./grid.js"></script>
+</head>
+<body>
+<div id="gameRect">
+    <canvas id="canvas"></canvas>
+</div>
+<script>
+  let width = 250;
+  let height = 500;
+
+  let canvas = document.getElementById('canvas');
+  let ctx = canvas.getContext('2d');
+
+  canvas.width = width;
+  canvas.height = height;
+
+  const stat = new Rectangle(100, 300, 25, 25);
+
+  const m = new Rectangle(100, 100, 25, 25);
+
+  const draw = () => {
+    ctx.clearRect(0, 0, width, height);
+
+    stat.draw(ctx, 'black');
+
+    m.sety = m.y + 25;
+    if(intersect(stat, m)) {
+      m.draw(ctx, 'red');
+    } else {
+      m.draw(ctx, 'black');
+    }
+
+    grid.draw(ctx, 2, 'gray');
+  }
+
+  setInterval(draw, 1000);
+
+</script>
+</body>
+</html>
