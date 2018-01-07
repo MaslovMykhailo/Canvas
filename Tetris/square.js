@@ -15,8 +15,8 @@ class Square extends Rectangle {
   }
 }
 
-const lastSquares = [];
+let statSquares = [];
 
 for(let i = 0 ; i < 250 ; i += 25) {
-  lastSquares.push(new Square(i, 500, 'black'));
+  statSquares.push(new Square(i, 500, 'black'));
 }

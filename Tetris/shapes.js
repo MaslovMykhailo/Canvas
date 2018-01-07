@@ -18,11 +18,11 @@ class Shape {
   }
   moveLeft() {
     this._sq.forEach(sq => {sq.setx = sq.x - 25});
-    if(!shapeInGrid(this)) shiftInGrid(this);
+    correctTurn(this);
   }
   moveRignt() {
     this._sq.forEach(sq => {sq.setx = sq.x + 25});
-    if(!shapeInGrid(this)) shiftInGrid(this);
+    correctTurn(this);
   }
   
   get xmin() {
@@ -92,7 +92,7 @@ class Shape2 extends Shape {
         this._sq[i].sety = this._sq[i].y + d;
         d -= 25;
       }
-      if(!shapeInGrid(this)) shiftInGrid(this);
+      correctTurn(this);
     } else {
       let d = -50;
       for(let i = 0 ; i < 4 ; i++) {
@@ -100,7 +100,7 @@ class Shape2 extends Shape {
         this._sq[i].sety = this._sq[i].y + d;
         d += 25;
       }
-      if(!shapeInGrid(this)) shiftInGrid(this);
+      correctTurn(this);
     }
   }
 }
