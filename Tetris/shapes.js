@@ -1,17 +1,30 @@
 'use strict';
 
-class Square extends Rectangle {
-  constructor(x, y, side) {
-    super(x, y, side, side);
-    
-    this.isLast = false;
-  }
-}
-
 class Shape {
   constructor() {
-    this.arrOfSq = [];
+    this._sq = [];
   }
+  
+  get arrOfSq() {
+    return this._sq;
+  }
+  
+  draw(ctx) {
+    this.arrOfSq.forEach(sq => sq.draw(ctx));
+  }
+  
+  moveDown() {
+    this._sq.forEach(sq => {sq.sety = sq.y + 25});
+  }
+  moveLeft() {
+    this._sq.forEach(sq => {sq.setx = sq.x - 25});
+    if(!shapeInGrid(this)) shiftInGrid(this);
+  }
+  moveRignt() {
+    this._sq.forEach(sq => {sq.setx = sq.x + 25});
+    if(!shapeInGrid(this)) shiftInGrid(this);
+  }
+  
   get xmin() {
     let min = 1000;
     this.arrOfSq.forEach(s => {
@@ -39,5 +52,55 @@ class Shape {
       max = max > s.y ? max : s.y;
     });
     return max;
+  }
+}
+
+class Shape1 extends Shape {
+  constructor() {
+    super();
+    
+    this._sq = [
+      new Square(100, 0, 'yellow'),
+      new Square(125, 0, 'yellow'),
+      new Square(100, 25, 'yellow'),
+      new Square(125, 25, 'yellow')
+    ];
+  }
+  
+  turn() {
+    // do nothing :)
+  }
+}
+
+class Shape2 extends Shape {
+  constructor() {
+    super();
+    
+    this._sq = [
+      new Square(100, 0, 'blue'),
+      new Square(100, 25, 'blue'),
+      new Square(100, 50, 'blue'),
+      new Square(100, 75, 'blue')
+    ];
+  }
+  
+  turn() {
+    if(this.arrOfSq[0].x === this.arrOfSq[1].x) {
+      let d = 50;
+      for(let i = 0 ; i < 4 ; i++) {
+        this._sq[i].setx = this._sq[i].x + d;
+        this._sq[i].sety = this._sq[i].y + d;
+        d -= 25;
+      }
+      if(!shapeInGrid(this)) shiftInGrid(this);
+    } else {
+      let d = -50;
+      for(let i = 0 ; i < 4 ; i++) {
+        this._sq[i].setx = this._sq[i].x + d;
+        this._sq[i].sety = this._sq[i].y + d;
+        d += 25;
+      }
+      if(!shapeInGrid(this)) shiftInGrid(this);
+    }
   }
 }
