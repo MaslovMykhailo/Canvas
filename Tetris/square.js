@@ -20,3 +20,24 @@ let statSquares = [];
 for(let i = 0 ; i < 250 ; i += 25) {
   statSquares.push(new Square(i, 500, 'black'));
 }
+
+const getCoord = (arrOfSq, coord, type) => {
+  const methods = {
+    min() {
+      let min = 1000;
+      arrOfSq.forEach(sq => {
+        min = min < sq[coord] ? min : sq[coord];
+      });
+      return min;
+    },
+    max() {
+      let max = -1000;
+      arrOfSq.forEach(sq => {
+        max = max > sq[coord] ? max : sq[coord];
+      });
+      return max;
+    }
+  };
+  
+  return methods[type]();
+};
