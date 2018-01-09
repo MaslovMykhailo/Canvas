@@ -3,8 +3,9 @@
 const intersection = (moveSq, statSq) => {
   let res = rectanglesIntersect(moveSq, statSq);
   if(res) {
-    if ((res.length < 5) ||
+    if((res.length < 5) ||
       (res.length === 7 && res[0].y !== res[6].y)) return null;
+    if(moveSq.y > statSq.y) return null;
     return new Point(statSq.x, statSq.y);
   } else {
     return null;
@@ -22,7 +23,7 @@ const addShapeToStat = (shape) => {
   statSquares = statSquares.concat(shape.arrOfSq);
 };
 
-const generateShape = () => {
+const getShape = (n) => {
   const shape = {
     '1'() {
       return new Shape1();
@@ -46,13 +47,14 @@ const generateShape = () => {
       return new Shape7();
     }
   };
-  return shape[randomNumber(1, 7).toString()]();
+  return shape[n]();
 };
 
 const intersectHandler = (moveShape) => {
   if(!intersectWithStatSqs(moveShape)) return moveShape;
   addShapeToStat(moveShape);
-  return generateShape();
+  statSquares = newStatSquares(statSquares.slice(), alwaysStatSqs);
+  return getShape(randomNumber(1, 7).toString());
 };
 
 const randomNumber = (min, max) => {
