@@ -1,14 +1,14 @@
 'use strict';
 
-const correctShift = (shape, arrOfStatSq, type) => {
-  let defSqs = shape.arrOfSq.slice();
-  
+const correctShift = (shape, def, arrOfStatSq, type) => {
+
   if(behindBorder(shape)) offsetBorder(shape);
   
   let overlapSqs = overlapSq(shape, arrOfStatSq);
-  if(overlapSqs) offsetStat(shape, overlapSqs, defSqs, type);
+  if(overlapSqs) offsetStat(shape, def, overlapSqs, type);
   
-  if(behindBorder(shape) || overlapSq(shape, arrOfStatSq)) shape.setSq = defSqs.slice();
+  if(behindBorder(shape) || overlapSq(shape, arrOfStatSq)) return def;
+  return shape;
 };
 
 const behindBorder = (shape) => {
@@ -21,7 +21,7 @@ const overlapSq = (shape, arrOfStatSq) => {
   
   for(let i = 0 ; i < arrOfStatSq.length ; i++) {
     let arr = shape.arrOfSq;
-    for(let j = 0 ; j < 4 ; j++) {
+    for(let j = 0 ; j < arr.length ; j++) {
       if(arr[j].x === arrOfStatSq[i].x &&
          arr[j].y === arrOfStatSq[i].y)
         overlapSqs.push(arrOfStatSq[i]);
@@ -57,7 +57,7 @@ const offsetBorder = (shape) => {
   }
 };
 
-const offsetStat = (shape, overlapSqs, defSqs, type) => {
+const offsetStat = (shape, def, overlapSqs, type) => {
   const methods = {
     moveRight() {
       shape._sq.forEach(sq => sq.setx = sq.x - 25);
@@ -66,19 +66,16 @@ const offsetStat = (shape, overlapSqs, defSqs, type) => {
       shape._sq.forEach(sq => sq.setx = sq.x + 25);
     },
     turn() {
-      console.log(getCoord(defSqs, 'y', 'max'), getCoord(overlapSqs, 'y', 'max'));
-      if(getCoord(defSqs, 'y', 'max') >= getCoord(overlapSqs, 'y', 'max')) {
-        let dx = countOfShift(overlapSqs, 'x');
-        console.log(dx);
-        if(getCoord(defSqs, 'x', 'max') < getCoord(overlapSqs, 'x', 'max')) {
-          shape._sq.forEach(sq => sq.setx = sq.x - dx * 25);
-        } else {
-          shape._sq.forEach(sq => sq.setx = sq.x + dx * 25);
-        }
-      } else {
+      if(def.ymin >= shape.ymax) {
         let dy = countOfShift(overlapSqs, 'y');
-        console.log(dy);
-        shape._sq.forEach(sq => sq.sety = sq.y - dy * 25);
+        shape._sq.forEach(sq => sq.setx = sq.x - 25 * dy);
+      } else {
+        let dx = countOfShift(overlapSqs, 'x');
+        if (def.xmax < shape.xmin) {
+          shape._sq.forEach(sq => sq.setx = sq.x - 25 * dx);
+        } else {
+          shape._sq.forEach(sq => sq.setx = sq.x + 25 * dx);
+        }
       }
     }
   };

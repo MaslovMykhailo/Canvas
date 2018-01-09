@@ -15,11 +15,13 @@ class Square extends Rectangle {
   }
 }
 
-let statSquares = [];
+let alwaysStatSqs = [];
 
 for(let i = 0 ; i < 250 ; i += 25) {
-  statSquares.push(new Square(i, 500, 'black'));
+  alwaysStatSqs.push(new Square(i, 500, 'black'));
 }
+
+let statSquares = [].concat(alwaysStatSqs);
 
 const getCoord = (arrOfSq, coord, type) => {
   const methods = {

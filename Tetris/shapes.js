@@ -21,20 +21,10 @@ class Shape {
     this._sq.forEach(sq => {sq.sety = sq.y + 25});
   }
   moveLeft() {
-    let self = this;
-    const move = () => {
-      self._sq.forEach(sq => {sq.setx = sq.x - 25});
-    };
-    // correctShift(self, statSquares, 'moveLeft', move);
-    move();
+    this._sq.forEach(sq => {sq.setx = sq.x - 25});
   }
   moveRight() {
-    let self = this;
-    const move = () => {
-      self._sq.forEach(sq => {sq.setx = sq.x + 25});
-    };
-    // correctShift(self, statSquares, 'moveRight', move);
-    move();
+    this._sq.forEach(sq => {sq.setx = sq.x + 25});
   }
   
   get xmin() {
@@ -60,6 +50,7 @@ class Shape1 extends Shape {
       new Square(125, 25, 'yellow')
     ]);
     this.position = 1;
+    this.kind = 1;
   }
   
   turn() {
@@ -76,6 +67,7 @@ class Shape2 extends Shape {
       new Square(100, 75, 'blue')
     ]);
     this.position = 1;
+    this.kind = 2;
   }
   
   turn() {
@@ -121,6 +113,7 @@ class Shape3 extends Shape {
       new Square(100, 50, 'purple'),
     ]);
     this.position = 1;
+    this.kind = 3;
   }
   
   turn() {
@@ -166,6 +159,7 @@ class Shape4 extends Shape {
       new Square(100, 50, 'blue'  )
     ]);
     this.position = 1;
+    this.kind = 4;
   }
   
   turn() {
@@ -207,6 +201,7 @@ class Shape5 extends Shape {
       new Square(125, 50, 'orange'  )
     ]);
     this.position = 1;
+    this.kind = 5;
   }
   
   turn() {
@@ -248,6 +243,7 @@ class Shape6 extends Shape {
       new Square(150, 25, 'red'),
     ]);
     this.position = 1;
+    this.kind = 6;
   }
   
   turn() {
@@ -277,6 +273,7 @@ class Shape7 extends Shape {
       new Square(100, 25, 'green'),
     ]);
     this.position = 1;
+    this.kind = 7;
   }
   
   turn() {
@@ -312,4 +309,14 @@ const turn = (shape, changeX, changeY) => {
     shape._sq[i].sety = methods[changeY](shape._sq[i].y, d);
     d -= 25;
   }
+};
+
+const copy = (shape) => {
+  const arrOfSq = [];
+  shape.arrOfSq.forEach(sq => {
+    arrOfSq.push(new Square(sq.x, sq.y, sq.color));
+  });
+  const copyShape = getShape(shape.kind);
+  copyShape.setSq = arrOfSq;
+  return copyShape;
 };
