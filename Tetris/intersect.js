@@ -23,13 +23,40 @@ const addShapeToStat = (shape) => {
 };
 
 const generateShape = () => {
-  return new Shape1();
+  const shape = {
+    '1'() {
+      return new Shape1();
+    },
+    '2'() {
+      return new Shape2();
+    },
+    '3'() {
+      return new Shape3();
+    },
+    '4'() {
+      return new Shape4();
+    },
+    '5'() {
+      return new Shape5();
+    },
+    '6'() {
+      return new Shape6();
+    },
+    '7'() {
+      return new Shape7();
+    }
+  };
+  return shape[randomNumber(1, 7).toString()]();
 };
 
 const intersectHandler = (moveShape) => {
   if(!intersectWithStatSqs(moveShape)) return moveShape;
   addShapeToStat(moveShape);
   return generateShape();
+};
+
+const randomNumber = (min, max) => {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
 };
 
 
