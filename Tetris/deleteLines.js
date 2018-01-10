@@ -1,5 +1,38 @@
 'use strict';
 
+const lines = {
+  count: 0,
+  getCount() {
+    return lines.count;
+  },
+  incCount() {
+    lines.count++;
+  },
+  clear() {
+    lines.count = 0;
+  }
+};
+
+const score = {
+  scoreValue: lines.getCount() * 100,
+  level: 1 + (lines.getCount() - lines.getCount() % 5) / 5,
+  get getScoreValue() {
+    return score.scoreValue;
+  },
+  get getLevel() {
+    return score.level;
+  },
+  clear() {
+    score.countOfLines = 0;
+  }
+};
+
+const upDateScore = () => {
+  lines.incCount();
+  score.scoreValue = lines.getCount() * 100;
+  score.level = 1 + (lines.getCount() - lines.getCount() % 5) / 5;
+};
+
 const shiftLines = (arrOfLines) => {
   let indexOfFullLines = [];
   
@@ -22,7 +55,7 @@ const shiftLines = (arrOfLines) => {
 
 const findFullLines = (statSqs) => {
   const arrOfLines = [];
-  for(let i = 1 ; i <= 20 ; i++) {
+  for(let i = 0 ; i <= 20 ; i++) {
     let y = 10 + 25 * (i - 1);
     let segment = new Segment(0, y, 250, y);
     
@@ -35,6 +68,7 @@ const findFullLines = (statSqs) => {
     if(arrOfSq.length >= 10) {
       isFull = true;
       arrOfSq = [];
+      upDateScore();
     }
     
     arrOfLines.push({i, isFull, arrOfSq});
