@@ -61,10 +61,10 @@ class Shape1 extends Shape {
 class Shape2 extends Shape {
   constructor() {
     super([
+      new Square(100, -25, 'blue'),
       new Square(100, 0, 'blue'),
       new Square(100, 25, 'blue'),
-      new Square(100, 50, 'blue'),
-      new Square(100, 75, 'blue')
+      new Square(100, 50, 'blue')
     ]);
     this.position = 1;
     this.kind = 2;

@@ -20,7 +20,7 @@ const intersectWithStatSqs = (shape) => {
 };
 
 const addShapeToStat = (shape) => {
-  statSquares = statSquares.concat(shape.arrOfSq);
+  statSquares = statSquares.concat(shape.arrOfSq.slice());
 };
 
 const getShape = (n) => {
@@ -52,14 +52,39 @@ const getShape = (n) => {
 
 const intersectHandler = (moveShape) => {
   if(!intersectWithStatSqs(moveShape)) return moveShape;
+  
   addShapeToStat(moveShape);
   statSquares = newStatSquares(statSquares.slice(), alwaysStatSqs);
-  return getShape(randomNumber(1, 7).toString());
+  
+  const newShape = getShape(randomNumber(1, 7).toString());
+  correctStart(newShape, statSquares);
+  
+  return newShape;
 };
 
 const randomNumber = (min, max) => {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 };
 
+const correctStart = (moveShape, arrOfStat) => {
+  let d = 0;
+  for(let i = 0 ; i <= 3 ; i++) {
+    let y = 10 + 25 * (i - 1);
+    let segment = new Segment(0, y, 250, y);
 
-
+    for(let j = 0 ; j < arrOfStat.length ; j++) {
+      if(intersect(segment, arrOfStat[j])) {
+        if(i === 0) {
+          alert('game over');
+          tetris.start();
+        }
+        d++;
+        break;
+      }
+    }
+  }
+  
+  moveShape._sq.forEach(sq => {
+    sq.sety = sq.y - 25 * d;
+  });
+};
