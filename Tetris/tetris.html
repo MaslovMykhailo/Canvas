@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>tetris</title>
+    <style>
+        #canvas {
+            display: block;
+        }
+        #gameRect {
+            display: block;
+            position: absolute;
+            top: 75px;
+            left: 450px;
+            border: 1px solid black;
+        }
+    </style>
+    <script src="../lib/Mouse/mouse.js"></script>
+    <script src="../lib/GeometricObjects/point.js"></script>
+    <script src="../lib/GeometricObjects/vector.js"></script>
+    <script src="../lib/GeometricObjects/rectangle.js"></script>
+    <script src="../lib/GeometricObjects/circle.js"></script>
+    <script src="../lib/GeometricObjects/segment.js"></script>
+    <script src="../lib/Intersection/circleObjectIntersect.js"></script>
+    <script src="../lib/Intersection/pointObjectIntersect.js"></script>
+    <script src="../lib/Intersection/rectanglesIntersection.js"></script>
+    <script src="../lib/Intersection/segmentObjectIntersect.js"></script>
+    <script src="../lib/Intersection/universalIntersect.js"></script>
+    <script src="./grid.js"></script>
+    <script src="./intersect.js"></script>
+    <script src="./correctShift.js"></script>
+    <script src="./shapes.js"></script>
+    <script src="./square.js"></script>
+    <script src="./deleteLines.js"></script>
+    <script src="./tetris.js"></script>
+</head>
+<body>
+<div id="gameRect">
+    <canvas id="canvas"></canvas>
+</div>
+<script>
+  let width = 250;
+  let height = 500;
+
+  let canvas = document.getElementById('canvas');
+  let ctx = canvas.getContext('2d');
+
+  canvas.width = width;
+  canvas.height = height;
+
+  // let moving = getShape(randomNumber(1, 7).toString());
+  //
+  // const draw = () => {
+  //   endGame(statSquares);
+  //
+  //   ctx.clearRect(0, 0, width, height);
+  //
+  //   moving.draw(ctx);
+  //   statSquares.forEach(sq => sq.draw(ctx));
+  //
+  //   grid.draw(ctx, 2, 'gray');
+  //
+  //
+  //   moving.moveDown();
+  //
+  //   moving = intersectHandler(moving, statSquares);
+  // };
+
+  const keyPressedHandler = (e) => {
+    if(e.keyCode === 37) {
+      tetris.moveLeft();
+    }
+    if(e.keyCode === 39) {
+      tetris.moveRight();
+    }
+    if(e.keyCode === 38) {
+      tetris.turn();
+    }
+    if(e.keyCode === 32) {
+      tetris.drop();
+    }
+    if(e.keyCode === 40) {
+      tetris.draw();
+    }
+
+    ctx.clearRect(0, 0, width, height);
+
+    tetris.moving.draw(ctx);
+    statSquares.forEach(sq => sq.draw(ctx));
+
+    grid.draw(ctx, 2, 'gray');
+  };
+
+  const onLoadDraw = () => {
+    tetris.start();
+  };
+
+  setInterval(tetris.draw, 500);
+  document.addEventListener('keydown', keyPressedHandler);
+  document.body.addEventListener('load', onLoadDraw);
+
+</script>
+</body>
+</html>
