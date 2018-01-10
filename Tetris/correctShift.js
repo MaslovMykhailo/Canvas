@@ -58,6 +58,7 @@ const offsetBorder = (shape) => {
 };
 
 const offsetStat = (shape, def, overlapSqs, type) => {
+  
   const methods = {
     moveRight() {
       shape._sq.forEach(sq => sq.setx = sq.x - 25);
