@@ -44,10 +44,10 @@ class Shape {
 class Shape1 extends Shape {
   constructor() {
     super([
-      new Square(100, 0, 'yellow'),
-      new Square(125, 0, 'yellow'),
-      new Square(100, 25, 'yellow'),
-      new Square(125, 25, 'yellow')
+      new Square(100, -25, '#FFFF00'),
+      new Square(125, -25, '#FFFF00'),
+      new Square(100, 0, '#FFFF00'),
+      new Square(125, 0, '#FFFF00')
     ]);
     this.position = 1;
     this.kind = 1;
@@ -61,10 +61,10 @@ class Shape1 extends Shape {
 class Shape2 extends Shape {
   constructor() {
     super([
-      new Square(100, -25, 'blue'),
-      new Square(100, 0, 'blue'),
-      new Square(100, 25, 'blue'),
-      new Square(100, 50, 'blue')
+      new Square(100, -50, '#00BFFF'),
+      new Square(100, -25, '#00BFFF'),
+      new Square(100, 0, '#00BFFF'),
+      new Square(100, 25, '#00BFFF')
     ]);
     this.position = 1;
     this.kind = 2;
@@ -107,10 +107,10 @@ class Shape2 extends Shape {
 class Shape3 extends Shape {
   constructor() {
     super([
-      new Square(125, 25, 'purple'),
-      new Square(100, 0, 'purple'),
-      new Square(100, 25, 'purple'),
-      new Square(100, 50, 'purple'),
+      new Square(125, 0, '#6A0888'),
+      new Square(100, -25, '#6A0888'),
+      new Square(100, 0, '#6A0888'),
+      new Square(100, 25, '#6A0888'),
     ]);
     this.position = 1;
     this.kind = 3;
@@ -153,10 +153,10 @@ class Shape3 extends Shape {
 class Shape4 extends Shape {
   constructor() {
     super([
-      new Square(125, 0, 'blue'),
-      new Square(100, 0, 'blue'),
-      new Square(100, 25, 'blue'),
-      new Square(100, 50, 'blue'  )
+      new Square(125, -25, '#013ADF'),
+      new Square(100, -25, '#013ADF'),
+      new Square(100, 0, '#013ADF'),
+      new Square(100, 25, '#013ADF'  )
     ]);
     this.position = 1;
     this.kind = 4;
@@ -195,10 +195,10 @@ class Shape4 extends Shape {
 class Shape5 extends Shape {
   constructor() {
     super([
-      new Square(100, 0, 'orange'),
-      new Square(125, 0, 'orange'),
-      new Square(125, 25, 'orange'),
-      new Square(125, 50, 'orange'  )
+      new Square(100, -25, '#DF7401'),
+      new Square(125, -25, '#DF7401'),
+      new Square(125, 0, '#DF7401'),
+      new Square(125, 25, '#DF7401'  )
     ]);
     this.position = 1;
     this.kind = 5;
@@ -237,10 +237,10 @@ class Shape5 extends Shape {
 class Shape6 extends Shape {
   constructor() {
     super([
-      new Square(100, 0, 'red'),
-      new Square(125, 0, 'red'),
-      new Square(125, 25, 'red'),
-      new Square(150, 25, 'red'),
+      new Square(100, -25, '#B40404'),
+      new Square(125, -25, '#B40404'),
+      new Square(125, 0, '#B40404'),
+      new Square(150, 0, '#B40404'),
     ]);
     this.position = 1;
     this.kind = 6;
@@ -267,10 +267,10 @@ class Shape6 extends Shape {
 class Shape7 extends Shape {
   constructor() {
     super([
-      new Square(100, 0, 'green'),
-      new Square(125, 0, 'green'),
-      new Square(75, 25, 'green'),
-      new Square(100, 25, 'green'),
+      new Square(100, -25, '#31B404'),
+      new Square(125, -25, '#31B404'),
+      new Square(75, 0, '#31B404'),
+      new Square(100, 0, '#31B404'),
     ]);
     this.position = 1;
     this.kind = 7;

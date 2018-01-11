@@ -56,7 +56,11 @@ const intersectHandler = (moveShape) => {
   addShapeToStat(moveShape);
   statSquares = newStatSquares(statSquares.slice(), alwaysStatSqs);
   
-  const newShape = getShape(randomNumber(1, 7).toString());
+  let newShape = getShape(nextFigure.kind);
+  nextFigure = newNextFigure();
+  
+  let def = copy(newShape);
+  newShape = correctShift(newShape, def, statSquares, 'turn');
   correctStart(newShape, statSquares);
   
   return newShape;

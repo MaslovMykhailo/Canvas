@@ -2,7 +2,7 @@
 
 const lines = {
   count: 0,
-  getCount() {
+  get getCount() {
     return lines.count;
   },
   incCount() {
@@ -14,8 +14,8 @@ const lines = {
 };
 
 const score = {
-  scoreValue: lines.getCount() * 100,
-  level: 1 + (lines.getCount() - lines.getCount() % 5) / 5,
+  scoreValue: lines.getCount * 100,
+  level: 1 + (lines.getCount - lines.getCount % 5) / 5,
   get getScoreValue() {
     return score.scoreValue;
   },
@@ -28,9 +28,17 @@ const score = {
 };
 
 const upDateScore = () => {
-  lines.incCount();
-  score.scoreValue = lines.getCount() * 100;
-  score.level = 1 + (lines.getCount() - lines.getCount() % 5) / 5;
+  score.scoreValue = lines.getCount * 100;
+  let old = score.level;
+  score.level = 1 + (lines.getCount - lines.getCount % 5) / 5;
+  if(old < score.level) {
+    timer.clear();
+    timer.newInterval();
+  }
+  
+  document.getElementById('lines').innerText = lines.getCount;
+  document.getElementById('level').innerText = score.getLevel;
+  document.getElementById('score').innerText = score.getScoreValue;
 };
 
 const shiftLines = (arrOfLines) => {
@@ -68,6 +76,7 @@ const findFullLines = (statSqs) => {
     if(arrOfSq.length >= 10) {
       isFull = true;
       arrOfSq = [];
+      lines.incCount();
       upDateScore();
     }
     
