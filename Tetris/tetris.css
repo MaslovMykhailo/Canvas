@@ -1,0 +1,61 @@
+#tetris {
+    display: block;
+}
+
+#nextFigure {
+    display: block;
+    border: 3px solid gray;
+    border-radius: 3px;
+    margin-top: 10px;
+}
+
+#figureRect span {
+    font-size: 30px;
+    font-weight: bold;
+}
+
+#figureRect {
+    display: block;
+    position: absolute;
+    top: 75px;
+    left: 800px;
+    border: 5px inset gray;
+    border-radius: 10px;
+    padding: 10px;
+    background-color: #D8D8D8;
+    text-align: center;
+}
+
+#gameRect {
+    display: block;
+    position: absolute;
+    top: 75px;
+    left: 500px;
+    border: 5px solid gray;
+    border-radius: 5px;
+    background-color: black;
+}
+
+#scoreRect {
+    display: block;
+    position: absolute;
+    top: 75px;
+    left: 300px;
+    border: 5px inset gray;
+    border-radius: 10px;
+    padding: 10px;
+    background-color: #D8D8D8;
+}
+
+table {
+    width: 125px;
+    text-align: center;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+#lines, #level, #score {
+    color: white;
+    background-color: black;
+    border-radius: 10px;
+}
