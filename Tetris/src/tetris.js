@@ -49,7 +49,7 @@ const tetris = {
     tetris.grid.draw(ctx, 1, 'gray');
   },
   start() {
-    alert('start game');
+    // alert('start game');
     statSquares = [].concat(alwaysStatSqs);
   
     lines.clear();

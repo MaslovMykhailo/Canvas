@@ -79,8 +79,9 @@ const correctStart = (moveShape, arrOfStat) => {
     for(let j = 0 ; j < arrOfStat.length ; j++) {
       if(intersect(segment, arrOfStat[j])) {
         if(i === 0) {
-          alert('game over');
-          tetris.start();
+          // alert('game over');
+          // tetris.start();
+          question();
         }
         d++;
         break;

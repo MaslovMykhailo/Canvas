@@ -25,6 +25,7 @@
     <script src="src/tetris.js"></script>
     <script src="src/timer.js"></script>
     <script src="src/keyDownHandlers.js"></script>
+    <script src="src/questionWindow.js" defer></script>
 </head>
 <body>
 <div id="scoreRect">
@@ -33,30 +34,36 @@
             <td>Lines</td>
         </tr>
         <tr>
-            <td id="lines">Lines count</td>
+            <td id="lines">0</td>
         </tr>
         <tr>
             <td>Level</td>
         </tr>
         <tr>
-            <td id="level">Level number</td>
+            <td id="level">0</td>
         </tr>
         <tr>
             <td>Score</td>
         </tr>
         <tr>
-            <td id="score">Score count</td>
+            <td id="score">0</td>
         </tr>
     </table>
 </div>
 <div id="gameRect">
     <canvas id="tetris"></canvas>
 </div>
+<div id="window">
+    <span>Tetris</span>
+    <span>Start game</span>
+</div>
 <div id="figureRect">
     <span>Next</span>
     <canvas id ='nextFigure'></canvas>
 </div>
 <script>
+  const win = document.getElementById('window');
+
   let width = 250;
   let height = 500;
 
@@ -76,7 +83,7 @@
   smallCanvas.height = h;
 
   tetris.draw();
-  tetris.start();
+  // tetris.start();
 
 </script>
 </body>
